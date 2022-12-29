@@ -1,0 +1,31 @@
+In Hibernate, collection mapping is used to define the relationship between an entity and a collection of values or entities. There are several types of collection mapping that can be used in Hibernate, including one-to-many, many-to-many, and element collections.
+
+One-to-many collection mapping is used to define a relationship where an entity is related to multiple instances of the same or a different entity. This can be achieved using the @OneToMany annotation.
+
+Many-to-many collection mapping is used to define a relationship where multiple instances of one entity are related to multiple instances of the other entity. This can be achieved using the @ManyToMany annotation.
+
+Element collection mapping is used to define a relationship where an entity is related to a collection of values, such as a list of strings or a set of integers. This can be achieved using the @ElementCollection annotation.
+
+Here is an example of how you might define a one-to-many collection relationship between two entities using collection mapping in Hibernate:
+
+
+@Entity
+public class Customer {
+  @Id
+  private Long id;
+
+  private String name;
+
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "customer_id")
+  private List<Order> orders;
+}
+
+@Entity
+public class Order {
+  @Id
+  private Long id;
+
+  private String description;
+}
+In this example, the Customer entity has a one-to-many relationship with the Order entity, as a customer can have multiple orders. The @OneToMany annotation is used to define this relationship on the orders field in the Customer entity, and the @JoinColumn annotation is used to specify the foreign key column in the orders table that maps to the primary key of the customers table. The cascade attribute specifies that any operations performed on the customer entity should be cascaded to the related order entities, and the orphanRemoval attribute specifies that any orders that are no longer associated with a customer should be removed from the database.
