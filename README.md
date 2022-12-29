@@ -1,0 +1,1 @@
+# JIM3T5_Hibernate_Collection_Mapping
